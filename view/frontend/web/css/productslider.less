@@ -53,6 +53,31 @@
     width: initial;
 }
 
+//Read more
+.block-product-slider >.block-content {
+    position:relative;
+    >.readMore {
+        position:absolute;
+        top:-40px;
+        right:15px;
+        font-size:19px;
+        @media (max-width: 767px) {
+            top:-35px;        
+        }
+        >a {
+            color:#313131;
+            >.arrow {
+                margin-left: 5px;
+                display: inline-block;
+                padding: 3px;
+                border-top: 1px solid #313131;
+                border-right: 1px solid #313131;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+
 .block-product-slider {
   .products-grid {
     .product-item-info {

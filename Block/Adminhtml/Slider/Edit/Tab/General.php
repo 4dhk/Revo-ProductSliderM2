@@ -181,7 +181,17 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic {
                 'values' => ProductSlider::getSliderLocations()
             ]
         );
-
+		
+		$fieldset->addField(
+            'read_more_url',
+            'text',
+            [
+                'name' => 'read_more_url',
+                'label' => __('Read more URL'),
+                'title' => __('Read more URL')
+            ]
+        );
+		
         $fieldset->addField(
             'products_number',
             'text',
