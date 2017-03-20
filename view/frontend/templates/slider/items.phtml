@@ -24,7 +24,14 @@
 <?php $enableSwatches = $slider->getEnableSwatches() ?>
 <?php $enableAjaxcart = $slider->getEnableAjaxcart() ?>
 <?php $readMoreUrl = $slider->getReadMoreUrl() ?>
-<div class="block block-product-slider slider-list <?php /* @escapeNotVerified */ echo $class; ?>" <?php echo $slider->getRtl() ? 'dir="rtl" ' : "" ?> >
+<?php 
+	$sliderBackgroundImage = $slider->getBackgroundImage();
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+	$mediaUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+	$sliderBackgroundImageUrl = $mediaUrl.$sliderBackgroundImage;
+?>
+<div <?php if(!empty($sliderBackgroundImage)): ?>style="background-image:url('<?php echo $sliderBackgroundImageUrl ?>');"<?php endif ?> class="block block-product-slider slider-list <?php /* @escapeNotVerified */ echo $class; ?>" <?php echo $slider->getRtl() ? 'dir="rtl" ' : "" ?> >
     <?php if($slider->getDisplayTitle()): ?>
         <div class="block-title title">
             <strong id="block-<?php /* @escapeNotVerified */ echo $class?>-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $slider->getTitle() ?></strong>

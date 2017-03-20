@@ -35,6 +35,23 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]);
             }
         }
+		
+		if (version_compare($context->getVersion(), '1.0.2') < 0) {
+        	// Get module table
+            $tableName = $installer->getTable('trive_revo');
+            // Check if the table already exists
+            if ($installer->getConnection()->isTableExists($tableName) == true) {
+                $connection = $installer->getConnection();
+
+                $connection->addColumn(
+                $tableName,
+                'background_image',
+                [
+                    'type' => Table::TYPE_TEXT,
+                    'comment' => 'Background image'
+                ]);
+            }
+        }
 
         $installer->endSetup();
     }

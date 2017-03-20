@@ -192,6 +192,16 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic {
             ]
         );
 		
+		$fieldset->addField(
+    		'background_image',
+    		'image',
+    		[
+	    		'name' => 'background_image',
+	    		'label' => __('Background image'),
+	    		'title' => __('Background image')
+    		]
+    	);
+		
         $fieldset->addField(
             'products_number',
             'text',
