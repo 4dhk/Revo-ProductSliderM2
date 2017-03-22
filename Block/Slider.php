@@ -236,7 +236,7 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
             if(!array_intersect($swatchesHandles,$currentHandles)){
                 $block = $this->getLayout()->createBlock('Magento\Framework\View\Element\Template', 'ajaxcart-js')
                         ->setTemplate('Trive_Revo::ajax/js.phtml');
-                $this->getLayout()->setChild('content',$block->getNameInlayout(),'ajaxcart-js');
+                $this->getLayout()->setChild($this->getNameInlayout(),$block->getNameInlayout(),'ajaxcart-js');
             }
         }
     }
