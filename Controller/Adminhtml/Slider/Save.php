@@ -27,26 +27,33 @@ class Save extends \Trive\Revo\Controller\Adminhtml\Slider {
                     $productSlider->load($slider_id);
                 }
 
+
+
                 /** @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory */
 	            $mediaDirectory = $this->_objectManager->get('Magento\Framework\Filesystem')
 	            ->getDirectoryRead(DirectoryList::MEDIA);
             	$path = $mediaDirectory->getAbsolutePath();
 	
 	            // Delete, Upload Image
-				$imagePath = "";
-				if( !empty($sliderFormData['background_image']['value']) ){
-					$imagePath = $path.$sliderFormData['background_image']['value'];
-				}
-	            if(isset($sliderFormData['background_image']['delete']) && file_exists($imagePath)){
-	                unlink($imagePath);
-	                $sliderFormData['background_image'] = '';
-	            }
-	            if(isset($sliderFormData['background_image']) && is_array($sliderFormData['background_image'])){
-	                unset($sliderFormData['background_image']);
-	            }
-	            if($image = $this->uploadImage('background_image')){
-	                $sliderFormData['background_image'] = $image;
-	            }
+                $imageFieldnames = ['background_image', 'background_image_mobile', 'title_background_image', 'title_background_image_mobile'];
+                foreach($imageFieldnames as $imageFieldname){
+                    $imagePath = "";
+                    if( !empty($sliderFormData[$imageFieldname]['value']) ){
+                        $imagePath = $path.$sliderFormData[$imageFieldname]['value'];
+                    }
+                    if(isset($sliderFormData[$imageFieldname]['delete']) && file_exists($imagePath)){
+                        unlink($imagePath);
+                        $sliderFormData[$imageFieldname] = '';
+                    }
+                    if(isset($sliderFormData[$imageFieldname]) && is_array($sliderFormData[$imageFieldname])){
+                        unset($sliderFormData[$imageFieldname]);
+                    }
+                    if($image = $this->uploadImage($imageFieldname)){
+                        $sliderFormData[$imageFieldname] = $image;
+                    }
+                }
+
+
                 
                 $productSlider->setData($sliderFormData);
 
@@ -95,7 +102,7 @@ class Save extends \Trive\Revo\Controller\Adminhtml\Slider {
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if (isset($_FILES[$fieldId]) && $_FILES[$fieldId]['name']!=''){
-            $_FILES[$fieldId]['name'] = "backgroundImage_".$this->getRequest()->getParam('slider_id').".".pathinfo($_FILES[$fieldId]['name'], PATHINFO_EXTENSION);
+            $_FILES[$fieldId]['name'] = $fieldId."_".$this->getRequest()->getParam('slider_id').".".pathinfo($_FILES[$fieldId]['name'], PATHINFO_EXTENSION);
             $uploader = $this->_objectManager->create(
                 'Magento\Framework\File\Uploader',
                 array('fileId' => $fieldId)

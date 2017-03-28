@@ -201,6 +201,36 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic {
 	    		'title' => __('Background image')
     		]
     	);
+        
+        $fieldset->addField(
+            'background_image_mobile',
+            'image',
+            [
+                'name' => 'background_image_mobile',
+                'label' => __('Background image mobile'),
+                'title' => __('Background image mobile')
+            ]
+        );
+        
+        $fieldset->addField(
+            'title_background_image',
+            'image',
+            [
+                'name' => 'title_background_image',
+                'label' => __('Title background image'),
+                'title' => __('Title background image')
+            ]
+        );
+        
+        $fieldset->addField(
+            'title_background_image_mobile',
+            'image',
+            [
+                'name' => 'title_background_image_mobile',
+                'label' => __('Title background image mobile'),
+                'title' => __('Title background image mobile')
+            ]
+        );
 		
         $fieldset->addField(
             'products_number',
