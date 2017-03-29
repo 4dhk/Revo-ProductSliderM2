@@ -42,16 +42,18 @@
 <style>
 <?php if(!empty($sliderBackgroundImage)): ?>
 .block.block-product-slider.slider-list.slider-list<?php echo $sliderId ?>{
-    background-size: 100% 100%;
+    background-size: auto 100%;
     background-repeat: no-repeat;
+    background-position: center center;
     background-image:url('<?php echo $sliderBackgroundImageUrl ?>');
 }
 <?php endif ?>
 <?php if(!empty($sliderBackgroundImageMobile)): ?>
 @media (max-width: 767px) {
 .block.block-product-slider.slider-list.slider-list<?php echo $sliderId ?>{
-    background-size: 100% 100%;
+    background-size: 100% auto;
     background-repeat: no-repeat;
+    background-position: center center;
     padding-bottom: 10px;
     background-image:url('<?php echo $sliderBackgroundImageMobileUrl ?>');
 }
@@ -61,6 +63,7 @@
 .block-title.title.title<?php echo $sliderId ?>>strong{
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-position: center center;
     background-image:url('<?php echo $sliderTitleBackgroundImageUrl ?>');
     color: #fff;
     padding: 10px 40px 10px 40px;
@@ -71,6 +74,7 @@
 .block-title.title.title<?php echo $sliderId ?>>strong{
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-position: center center;
     background-image:url('<?php echo $sliderTitleBackgroundImageMobileUrl ?>');
     color: #fff;
     padding: 7px 20px 7px 20px;
