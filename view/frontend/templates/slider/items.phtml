@@ -42,7 +42,7 @@
 <style>
 <?php if(!empty($sliderBackgroundImage)): ?>
 .block.block-product-slider.slider-list.slider-list<?php echo $sliderId ?>{
-    background-size: auto 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-image:url('<?php echo $sliderBackgroundImageUrl ?>');
@@ -51,7 +51,7 @@
 <?php if(!empty($sliderBackgroundImageMobile)): ?>
 @media (max-width: 767px) {
 .block.block-product-slider.slider-list.slider-list<?php echo $sliderId ?>{
-    background-size: 100% auto;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     padding-bottom: 10px;
