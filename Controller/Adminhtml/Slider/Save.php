@@ -104,9 +104,12 @@ class Save extends \Trive\Revo\Controller\Adminhtml\Slider {
         if (isset($_FILES[$fieldId]) && $_FILES[$fieldId]['name']!=''){
             $_FILES[$fieldId]['name'] = $fieldId."_".$this->getRequest()->getParam('slider_id').".".pathinfo($_FILES[$fieldId]['name'], PATHINFO_EXTENSION);
             $uploader = $this->_objectManager->create(
-                'Magento\Framework\File\Uploader',
+                'Magento\MediaStorage\Model\File\Uploader',
                 array('fileId' => $fieldId)
-            ); 
+            );
+
+            $uploader->setAllowRenameFiles(true);
+            $uploader->setFilesDispersion(true);
 			
             /** @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory */
             $mediaDirectory = $this->_objectManager->get('Magento\Framework\Filesystem')
@@ -117,7 +120,7 @@ class Save extends \Trive\Revo\Controller\Adminhtml\Slider {
                 //$uploader->setAllowRenameFiles(true);
                 $uploader->setFilesDispersion(false);
                 $result = $uploader->save($mediaDirectory->getAbsolutePath($mediaFolder));
-                return $mediaFolder.$result['name'];
+                return $mediaFolder.$result['file'];
             } catch (\Exception $e) {
                 $this->_logger->critical($e);
                 $this->messageManager->addError($e->getMessage());
